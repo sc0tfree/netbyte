@@ -1,6 +1,5 @@
+# Netbyte
 
-
-#Netbyte
 ![Version 0.5](http://img.shields.io/badge/version-v0.5-orange.svg)
 ![Python 2.7](http://img.shields.io/badge/python-2.7-blue.svg)
 ![MIT License](http://img.shields.io/badge/license-MIT%20License-blue.svg)
@@ -9,7 +8,7 @@
 Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
 It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.
 
-##Why
+## Why
 
 When testing proprietary or custom-written services on pentests, I’ve frequently been disappointed while trying to reverse engineer 
 these protocols.
@@ -18,7 +17,7 @@ In the past, this has been done using netcat with wireshark and/or hexdump.
 However, due to truncation issues with using hexdump (i.e.: `nc domain.com 1234 | hexdump -C`)
 and wireshark’s tedious process, I decided to create Netbyte as quick and easy alternative when opening unknown ports.
 
-##Install
+## Install
 
 Clone the git:
 ```
@@ -33,7 +32,7 @@ Run setup.py script with 'install':
 python setup.py install
 ```
 
-##Usage
+## Usage
 
 ```
 $ netbyte example.com 12345
@@ -77,7 +76,7 @@ $ echo "GET /" | netbyte test.com 80
 Connection closed
 ```
 
-##Test Server
+## Test Server
 
 I have included a test server to better view the functionality of netbyte. The server has two tests:
 * Echo Test - echo back a user entered string
@@ -92,13 +91,13 @@ In another terminal, connect to the test server using netbyte:
 $ netbyte localhost 12345
 ```
 
-##License and Contributions
+## License and Contributions
 
 Netbyte is under the MIT License.
 
 Questions, comments and suggestions are always welcomed!
 
-##Future Work
+## Future Work
 
 * Ability to enter input sent as hex
 * Listen option to interact with custom-built clients
