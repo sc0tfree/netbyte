@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='netbyte',
-    version='0.4',
+    version='0.5',
     url='http://www.sc0tfree.com',
     license='MIT License',
     author='sc0tfree',
