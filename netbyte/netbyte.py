@@ -18,32 +18,6 @@ from threading import Thread
 from Queue import Queue, Empty
 
 
-class ReadAsync(object):
-    '''
-    ReadAsync starts a queue thread to accept stdin
-    '''
-    def __init__(self, blocking_function, *args):
-        self.args = args
-
-        self.read = blocking_function
-
-        self.thread = Thread(target=self.enqueue)
-
-        self.queue = Queue()
-
-        self.thread.daemon = True
-
-        self.thread.start()
-
-    def enqueue(self):
-        while True:
-            buffer = self.read(*self.args)
-            self.queue.put(buffer)
-
-    def dequeue(self):
-        return self.queue.get_nowait()
-
-
 def description():
     '''
     argparse description text
