@@ -76,3 +76,12 @@ def to_hex(string):
         full_hex += result
 
     return full_hex
+
+
+def generate_random_hex(length):
+    '''
+    Generates a hex string of arbitrary length - 1, ending in a newline.
+    '''
+    hex_string = os.urandom(length - 1)
+    hex_string += '\x0a'
+    return hex_string
