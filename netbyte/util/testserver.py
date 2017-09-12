@@ -25,7 +25,15 @@ def launch_testserver(port):
 
     s = socket.socket()
 
-    s.bind((host, port))
+    try:
+        s.bind((host, port))
+    except socket.error as e:
+        if e.errno == 13:
+            out.print_error("Permission denied: try again as superuser")
+        elif e.errno == 48:
+            out.print_error("Port is already in use")
+    except OverflowError:
+            out.print_error("Port must be between 1 and 65535")
 
     s.listen(5)
 
