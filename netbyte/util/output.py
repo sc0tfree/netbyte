@@ -21,6 +21,13 @@ def print_info(string):
     print(Fore.GREEN + Style.BRIGHT + string + Style.RESET_ALL)
 
 
+def print_flat(string):
+    '''
+    Print string with no colors
+    '''
+    print(string)
+
+
 def print_ascii(string):
     '''
     Print string with ASCII color configuration
