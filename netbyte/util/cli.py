@@ -11,6 +11,7 @@
 # netbyte.util.cli module
 #
 
+import sys
 import argparse
 
 
