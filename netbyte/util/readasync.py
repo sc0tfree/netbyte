@@ -11,6 +11,10 @@
 # netbyte.util.readasync module
 #
 
+from threading import Thread
+from Queue import Queue, Empty
+
+
 class ReadAsync(object):
     '''
     ReadAsync starts a queue thread to accept stdin

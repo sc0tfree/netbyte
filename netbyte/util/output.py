@@ -11,6 +11,8 @@
 # netbyte.util.output module
 #
 
+from colorama import Fore, Style
+
 
 def print_ascii(string):
     '''

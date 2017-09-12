@@ -13,9 +13,8 @@ import errno
 import argparse
 import sys
 import time
-from colorama import Fore, Style
-from threading import Thread
-from Queue import Queue, Empty
+import util.output
+from util.readasync import ReadAsync
 
 
 def description():
