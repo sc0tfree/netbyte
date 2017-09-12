@@ -14,6 +14,7 @@ import argparse
 import sys
 import time
 import util.output as out
+import util.text as text
 from util.readasync import ReadAsync
 
 
