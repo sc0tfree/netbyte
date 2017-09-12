@@ -13,6 +13,7 @@ import errno
 import argparse
 import sys
 import time
+from Queue import Empty
 import util.output as out
 import util.text as text
 from util.readasync import ReadAsync

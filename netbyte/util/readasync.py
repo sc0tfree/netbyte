@@ -12,7 +12,7 @@
 #
 
 from threading import Thread
-from Queue import Queue, Empty
+from Queue import Queue
 
 
 class ReadAsync(object):
