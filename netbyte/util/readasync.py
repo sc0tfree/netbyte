@@ -13,6 +13,7 @@
 
 from threading import Thread
 from Queue import Queue
+from text import process_buffer
 
 
 class ReadAsync(object):
@@ -35,7 +36,8 @@ class ReadAsync(object):
     def enqueue(self):
         while True:
             buffer = self.read(*self.args)
-            self.queue.put(buffer)
+            buffer_p = process_buffer(buffer)
+            self.queue.put(buffer_p)
 
     def dequeue(self):
         return self.queue.get_nowait()

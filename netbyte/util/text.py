@@ -12,6 +12,7 @@
 #
 
 import os
+import re
 
 
 def is_symbol(character):
@@ -87,3 +88,12 @@ def generate_random_hex(length):
     hex_string = os.urandom(length - 1)
     hex_string += '\x0a'
     return hex_string
+
+
+def process_buffer(string):
+    p = re.compile('^\s*!!([\s\S]*)')
+    m = p.match(string)
+    if m:
+        return eval(m.group(1))
+    else:
+        return string
