@@ -9,7 +9,7 @@ setup(
     author_email='henry@sc0tfree.com',
     description='Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services. It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.',
     keywords='utils cli netcat hexadecimal',
-    packages=['netbyte'],
+    packages=['netbyte', 'netbyte.util'],
     install_requires=[
         'colorama',
     ],
