@@ -11,6 +11,8 @@
 # netbyte.util.text module
 #
 
+import os
+
 
 def is_symbol(character):
     '''

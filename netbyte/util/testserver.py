@@ -11,6 +11,7 @@
 # netbyte.util.testserver module
 #
 
+import socket
 import text
 
 def launch_testserver():
