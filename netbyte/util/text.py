@@ -13,6 +13,7 @@
 
 import os
 import re
+import output as out
 
 
 def is_symbol(character):
@@ -94,6 +95,11 @@ def process_buffer(string):
     p = re.compile('^\s*!!([\s\S]*)')
     m = p.match(string)
     if m:
-        return eval(m.group(1))
+        try:
+            evaluated = eval(m.group(1))
+        except SyntaxError:
+            out.print_info("Incorrectly formatted statement. Please try again.")
+            return ''
+        return evaluated
     else:
         return string
