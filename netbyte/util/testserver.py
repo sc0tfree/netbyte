@@ -15,12 +15,11 @@ import socket
 import text
 import output as out
 
-def launch_testserver(args):
+def launch_testserver(port):
     '''
     Launches test server on infinite loop until interrupt
     '''
     host = '127.0.0.1'
-    port = args.testserver
 
     out.print_info('Starting test server on 127.0.0.1:' + str(port))
 

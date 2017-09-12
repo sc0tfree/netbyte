@@ -21,6 +21,6 @@ def main():
     args = cli.parse_arguments()
 
     if args.testserver is not False:
-        ts.launch_testserver(args)
+        ts.launch_testserver(args.testserver)
     else:
         net.connect(args)
