@@ -13,7 +13,7 @@ import errno
 import argparse
 import sys
 import time
-import util.output
+import util.output as out
 from util.readasync import ReadAsync
 
 
@@ -69,9 +69,9 @@ def main():
         connection.connect(address)
 
     except socket.error:
-        print_error("Could not establish connection to " + address[0] + ":" + str(address[1]))
+        out.print_error("Could not establish connection to " + address[0] + ":" + str(address[1]))
 
-    print(Fore.GREEN + Style.BRIGHT + "Connection established" + Style.RESET_ALL)
+    # print(Fore.GREEN + Style.BRIGHT + "Connection established" + Style.RESET_ALL)
 
     try:
         connection.setblocking(0)
@@ -82,8 +82,8 @@ def main():
                 data = connection.recv(4096)
                 if not data:
                     raise socket.error
-                print_ascii(data)
-                print_hex(to_hex(data))
+                out.print_ascii(data)
+                out.print_hex(to_hex(data))
             except socket.error, e:
                 if e.errno != errno.EWOULDBLOCK:
                     raise
@@ -94,6 +94,6 @@ def main():
 
     except KeyboardInterrupt:
         connection.close()
-        print_error("\nExiting...")
+        out.print_error("\nExiting...")
     except socket.error:
-        print_error("Connection closed")
+        out.print_error("Connection closed")
