@@ -38,7 +38,7 @@ def connect(args):
     except socket.error:
         out.print_error("Could not establish connection to " + address[0] + ":" + str(address[1]))
 
-    # print(Fore.GREEN + Style.BRIGHT + "Connection established" + Style.RESET_ALL)
+    out.print_info("Connection Established")
 
     try:
         connection.setblocking(0)
