@@ -10,6 +10,7 @@
 
 import util.cli as cli
 import util.network as net
+import util.testserver as ts
 
 
 def main():
@@ -19,4 +20,7 @@ def main():
 
     args = cli.parse_arguments()
 
-    net.connect(args)
+    if args.testserver is not False:
+        ts.launch_testserver(args)
+    else:
+        net.connect(args)
