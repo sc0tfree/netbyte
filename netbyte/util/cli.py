@@ -46,7 +46,7 @@ def parse_arguments():
 
     if '--testserver' in sys.argv:
         testserver_parser = argparse.ArgumentParser()
-        testserver_parser.add_argument('--testserver', nargs='?', dest='port', type=int, const=12345)
+        testserver_parser.add_argument('--testserver', nargs='?', type=int, const=12345)
         args = testserver_parser.parse_args()
     else:
         args = parser.parse_args()

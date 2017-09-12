@@ -13,6 +13,7 @@
 
 import socket
 import text
+import output as out
 
 def launch_testserver(args):
     '''
@@ -20,6 +21,8 @@ def launch_testserver(args):
     '''
     host = '127.0.0.1'
     port = args.testserver
+
+    out.print_info('Starting test server on 127.0.0.1:' + str(port))
 
     s = socket.socket()
 
@@ -62,6 +65,8 @@ def launch_testserver(args):
             print 'Closed connection to ', addr[0], ':', addr[1]
 
     except KeyboardInterrupt:
-        c.close()
-        print '\nExiting...'
-        exit(0)
+        try:
+            c.close()
+        except NameError:
+            pass
+        out.print_error('\nExiting...')
