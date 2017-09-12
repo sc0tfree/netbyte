@@ -1,8 +1,9 @@
 from setuptools import setup
+from netbyte import __version__ as VERSION
 
 setup(
     name='netbyte',
-    version='0.5',
+    version=VERSION,
     url='http://www.sc0tfree.com',
     license='MIT License',
     author='sc0tfree',

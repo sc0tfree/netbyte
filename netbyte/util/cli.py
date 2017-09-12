@@ -13,15 +13,19 @@
 
 import sys
 import argparse
+from .. import __version__ as VERSION
 
 
 def description():
     '''
     argparse description text
     '''
-    return '''
-Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
-It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.'''
+    heading = 'Netbyte ' + VERSION + ' (by @sc0tfree)'
+    body = '''
+    Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
+    It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.
+    '''
+    return heading + body
 
 
 def parse_arguments():
