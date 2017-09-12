@@ -14,7 +14,7 @@ import util.network as net
 
 def main():
     '''
-    Main function: Connects to host/port and spawns ReadAsync
+    Main function: Handles arguments, server:port connection and test server
     '''
 
     args = cli.parse_arguments()

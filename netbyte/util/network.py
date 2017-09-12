@@ -23,6 +23,9 @@ from readasync import ReadAsync
 
 
 def connect(args):
+    '''
+    Connects to server and port based on argparse namespace object
+    '''
     if args.udp:
         connection = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     else:

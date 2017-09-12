@@ -15,6 +15,9 @@ import socket
 import text
 
 def launch_testserver():
+    '''
+    Launches test server on infinite loop until interrupt
+    '''
     host = '127.0.0.1'
     port = 12345
 

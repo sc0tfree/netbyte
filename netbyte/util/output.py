@@ -15,6 +15,9 @@ from colorama import Fore, Style
 
 
 def print_info(string):
+    '''
+    Print string with info color configuration
+    '''
     print(Fore.GREEN + Style.BRIGHT + string + Style.RESET_ALL)
 
 def print_ascii(string):
