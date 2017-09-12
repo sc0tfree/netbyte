@@ -10,45 +10,13 @@
 
 import socket
 import errno
-import argparse
 import sys
 import time
 from Queue import Empty
+import util.cli as cli
 import util.output as out
 import util.text as text
 from util.readasync import ReadAsync
-
-
-def description():
-    '''
-    argparse description text
-    '''
-    return '''
-Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
-It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.'''
-
-
-def parse_arguments():
-    '''
-    Parse command line arguments
-
-    Returns:
-        argparse Namespace object
-    '''
-    parser = argparse.ArgumentParser(description=description(), formatter_class=argparse.RawTextHelpFormatter)
-
-    parser.add_argument('hostname', metavar='HOSTNAME', help='Host or IP to connect to')
-    parser.add_argument('port', metavar='PORT', help='Connection port')
-    parser.add_argument('-u', dest='udp', action="store_true", default=False, help='Use UDP instead of default TCP')
-
-    if len(sys.argv) == 1:
-
-        parser.print_help()
-
-        exit(1)
-
-    args = parser.parse_args()
-    return args
 
 
 def main():
@@ -56,7 +24,7 @@ def main():
     Main function: Connects to host/port and spawns ReadAsync
     '''
 
-    args = parse_arguments()
+    args = cli.parse_arguments()
 
     if args.udp:
         connection = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
