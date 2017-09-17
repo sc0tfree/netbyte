@@ -180,8 +180,6 @@ def launch_testserver(port):
                 out.print_info("Connection closed.")
                 c.close()
 
-    except ValueError:
-        pass
     except KeyboardInterrupt:
         s.close()
         out.print_error("\nExiting...")
