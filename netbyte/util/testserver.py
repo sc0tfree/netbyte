@@ -46,7 +46,7 @@ def handle_connection(connection, addr):
         initial_message: This is used to pass on a remaining message from a
             previous call to run_test
 
-        returns: Any remaining message recieved after the test is ended, or ""
+        returns: Any remaining message received after the test is ended, or ""
         '''
         out.print_flat(test_name + ":")
         connection.send(test_name + ":\nType 'end' to exit\n")
