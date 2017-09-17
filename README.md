@@ -1,11 +1,11 @@
 # Netbyte
 
-![Version 0.5](http://img.shields.io/badge/version-v0.5-orange.svg)
+![Version 1.0](http://img.shields.io/badge/version-v1.0-orange.svg)
 ![Python 2.7](http://img.shields.io/badge/python-2.7-blue.svg)
 ![MIT License](http://img.shields.io/badge/license-MIT%20License-blue.svg)
 [![sc0tfree Twitter](http://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Follow)](https://twitter.com/sc0tfree)
 
-Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
+Netbyte is a Netcat-style tool that facilitates manual probing, fuzzing and exploitation of TCP and UDP services.
 It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.
 
 ## Why
@@ -32,7 +32,7 @@ Run setup.py script with 'install':
 python setup.py install
 ```
 
-## Usage
+## Basic Usage
 
 ```
 $ netbyte example.com 12345
@@ -76,15 +76,39 @@ $ echo "GET /" | netbyte test.com 80
 Connection closed
 ```
 
+## Fuzzing and Manual Exploitation
+
+Netbyte is able to send evaluated Python expressions by using ```!!``` at the beginning of any input. This is useful for manual fuzzing and even exploitation.
+
+### Examples:
+| Expression | Result |
+|:-----------|:-------|
+| ```!! "A" * 200``` | Send 200 A's |
+| ```!! "\x65" * 200``` | Send 200 A's |
+| ```!! "\x65\x66\x67" * 3 + "\n"``` | Send ABCABCABC and a newline |
+
+
+Let's see it in action:
+```
+netbyte ftpserver.com 21
+220 ProFTPD 1.3.1 Server (ProFTPD)
+USER anonymous
+331 Anonymous login ok, send complete email address as your password
+!! "PASS " + "A" * 2000
+```
+
+For a more complete review see my blog post, [Manual Fuzzing and Exploitation with Netbyte](https://www.sc0tfree.com/something).
+
 ## Test Server
 
 I have included a test server to better view the functionality of netbyte. The server has two tests:
 * Echo Test - echo back a user entered string
-* Hex Test - send a random hexadecimal string of user-specified size
+* Hex Test - server send a random hexadecimal string of user-specified size
+* Count Test - server counts number of input bytes sent from client
 
-To run the test server:
+To run the test server on default port 12345:
 ```
-$ python testserver.py
+$ netbyte --testserver
 ```
 In another terminal, connect to the test server using netbyte:
 ```
@@ -104,6 +128,5 @@ Questions, comments and suggestions are always welcomed!
 
 ## Future Work
 
-* Ability to enter input sent as hex
 * Listen option to interact with custom-built clients
 * Proper unit tests
