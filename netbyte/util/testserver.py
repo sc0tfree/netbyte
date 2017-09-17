@@ -70,24 +70,27 @@ def handle_connection(connection, addr):
                 raise DisconnectedError()
 
             if "\n" in message:
-                # Consume the message line by line
+                # Consume the messages line by line
                 start_i = 0
-                end_i = message.find("\n")
+                full_message = "".join(messages)
+                end_i = full_message.find("\n")
                 while end_i != -1 and not done:
-                    line = message[start_i: end_i]
+                    line = full_message[start_i: end_i + 1]
                     if end_pattern.match(line):
                         done = True
                     else:
                         data_handler(line)
 
                     start_i = end_i + 1
-                    end_i = message.find("\n", start_i)
+                    end_i = full_message.find("\n", start_i)
 
                 if start_i < len(message) - 1:
                     if done:
-                        remaining_message = message[start_i:]
+                        remaining_message = full_message[start_i:]
                     else:
-                        messages = [message[start_i:]]
+                        messages = [full_message[start_i:]]
+                else:
+                    messages = []
 
         return remaining_message
 
@@ -96,7 +99,7 @@ def handle_connection(connection, addr):
         Receives a string, sends it back
         '''
         out.print_flat("Received: " + line.rstrip())
-        connection.send(line + "\n")
+        connection.send(line)
 
     def hex_handler(line):
         '''
