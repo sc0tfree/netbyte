@@ -76,7 +76,7 @@ $ echo "GET /" | netbyte test.com 80
 Connection closed
 ```
 
-## Fuzzing and Manual Exploitation
+## Manual Fuzzing and Exploitation
 
 Netbyte is able to send evaluated Python expressions by using ```!!``` at the beginning of any input. This is useful for manual fuzzing and even exploitation.
 
