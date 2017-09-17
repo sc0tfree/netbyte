@@ -178,6 +178,7 @@ def launch_testserver(port):
 
             except DisconnectedError:
                 out.print_info("Connection closed.")
+                c.close()
 
     except ValueError:
         pass
