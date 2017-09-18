@@ -78,16 +78,16 @@ Connection closed
 
 ## Manual Fuzzing and Exploitation
 
-Netbyte is able to send evaluated Python expressions by using ```!!``` at the beginning of any input. This is useful for manual fuzzing and even exploitation.
+Netbyte is able to send evaluated Python expressions by using `!!` at the beginning of any input. This is useful for manual fuzzing and even exploitation.
 
 *Note: using this mode does not automatically include a newline (\n) in the string to send. If you wish to include a newline, make sure to add ```+ "\n"``` to your statement.*
 
 ### Examples:
 | Expression | Result |
 |:-----------|:-------|
-| ```!! "A" * 200``` | Send 200 A's |
-| ```!! "\x65" * 200``` | Send 200 A's |
-| ```!! "\x65\x66\x67" * 3 + "\n"``` | Send ABCABCABC and a newline |
+| `!! "A" * 200` | Send 200 A's |
+| `!! "\x65" * 200` | Send 200 A's |
+| `!! "\x65\x66\x67" * 3 + "\n"` | Send ABCABCABC and a newline |
 
 
 Let's see it in action:
