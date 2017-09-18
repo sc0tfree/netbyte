@@ -117,12 +117,6 @@ In another terminal, connect to the test server using netbyte:
 $ netbyte localhost 12345
 ```
 
-## Modifying Output Colors
-
-To modify the color scheme, change the output functions inside the netbyte.util.output module.
-
-See the [colorama page](https://pypi.python.org/pypi/colorama) for color options.
-
 ## License and Contributions
 
 Netbyte is under the MIT License.
