@@ -103,10 +103,13 @@ For a more complete review see my blog post, [Manual Fuzzing and Exploitation wi
 
 ## Test Server
 
-I have included a test server to better view the functionality of netbyte. The server has two tests:
-* Echo Test - echo back a user entered string
-* Hex Test - server send a random hexadecimal string of user-specified size
-* Count Test - server counts number of input bytes sent from client
+Netbyte includes a built-in test server to better view its functionality.
+
+The server has three tests:
+
+* Echo Test - server echoes back a user-specified string
+* Display Hex Test - server sends a string of random bytes with user-specified length
+* Byte Count Test - server counts number of input bytes sent from client
 
 To run the test server on default port 12345:
 ```
