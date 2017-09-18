@@ -119,7 +119,8 @@ $ netbyte localhost 12345
 
 ## Modifying Output Colors
 
-To modify the color scheme, change the functions `print_ascii` and `print_hex` inside the netbyte package.
+To modify the color scheme, change the output functions inside the netbyte.util.output module.
+
 See the [colorama page](https://pypi.python.org/pypi/colorama) for color options.
 
 ## License and Contributions
