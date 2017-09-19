@@ -11,6 +11,7 @@
 # netbyte.util.testserver module
 #
 
+import os
 import re
 import errno
 import socket
@@ -112,7 +113,7 @@ def handle_connection(connection, addr):
         except ValueError:
             connection.send("You must enter a number larger than 0. Defaulting to 10.\n")
             hex_length = 10
-        hex_string = text.generate_random_hex(hex_length)
+        hex_string = os.urandom(hex_length - 1) + "\x0a"
         out.print_flat("Sending: " + hex_string)
         connection.send(hex_string)
 
