@@ -22,8 +22,8 @@ def check_eval(string):
     m = p.match(string)
     if m:
         try:
-            evaluated = eval(m.group(1))
-        except (SyntaxError, ValueError, TypeError):
+            evaluated = eval(m.group(1), {"__builtins__":None}, {})
+        except (SyntaxError, ValueError, TypeError, NameError):
             out.print_info("Incorrectly formatted statement. Please try again.")
             return ''
         return evaluated
