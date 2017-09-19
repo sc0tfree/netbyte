@@ -22,9 +22,9 @@ def check_eval(string):
     m = p.match(string)
     if m:
         try:
-            evaluated = eval(m.group(1), {"__builtins__":None}, {})
+            evaluated = eval(m.group(1), {'__builtins__':None}, {})
         except (SyntaxError, ValueError, TypeError, NameError):
-            out.print_info("Incorrectly formatted statement. Please try again.")
+            out.print_info('Incorrectly formatted statement. Please try again.')
             return ''
         return evaluated
     else:
