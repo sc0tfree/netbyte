@@ -28,12 +28,12 @@ def print_flat(string):
     print(string)
 
 
-def print_ascii(string):
+def print_raw(string):
     '''
-    Print string with ASCII color configuration
+    Print string with raw text color configuration
     '''
     if string.isspace():
-        # Add a space to show colors on a non-ASCII line
+        # Add a space to show colors on a non-raw text line
         string = ' ' + string
     print(Fore.MAGENTA + Style.BRIGHT + string + Style.RESET_ALL)
 
