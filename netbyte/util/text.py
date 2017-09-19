@@ -11,9 +11,6 @@
 # netbyte.util.text module
 #
 
-import re
-import output as out
-
 
 def is_symbol(character):
     '''
@@ -79,17 +76,3 @@ def to_hex(string):
         full_hex += result
 
     return full_hex
-
-
-def process_buffer(string):
-    p = re.compile('^\s*!!([\s\S]*)')
-    m = p.match(string)
-    if m:
-        try:
-            evaluated = eval(m.group(1))
-        except (SyntaxError, ValueError, TypeError):
-            out.print_info("Incorrectly formatted statement. Please try again.")
-            return ''
-        return evaluated
-    else:
-        return string

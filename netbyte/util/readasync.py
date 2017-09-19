@@ -11,9 +11,24 @@
 # netbyte.util.readasync module
 #
 
+import re
 from threading import Thread
 from Queue import Queue
-from text import process_buffer
+import output as out
+
+
+def check_eval(string):
+    p = re.compile('^\s*!!([\s\S]*)')
+    m = p.match(string)
+    if m:
+        try:
+            evaluated = eval(m.group(1))
+        except (SyntaxError, ValueError, TypeError):
+            out.print_info("Incorrectly formatted statement. Please try again.")
+            return ''
+        return evaluated
+    else:
+        return string
 
 
 class ReadAsync(object):
@@ -36,8 +51,8 @@ class ReadAsync(object):
     def enqueue(self):
         while True:
             buffer = self.read(*self.args)
-            buffer_p = process_buffer(buffer)
-            self.queue.put(buffer_p)
+            buffer_e = check_eval(buffer)
+            self.queue.put(buffer_e)
 
     def dequeue(self):
         return self.queue.get_nowait()
