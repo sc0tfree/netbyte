@@ -15,7 +15,6 @@ import os
 import re
 import errno
 import socket
-import text
 import output as out
 from .. import __version__ as VERSION
 
