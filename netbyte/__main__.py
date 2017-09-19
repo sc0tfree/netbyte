@@ -36,7 +36,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description=description(), formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument('hostname', metavar='HOSTNAME', help='Host or IP to connect to')
-    parser.add_argument('port', metavar='PORT', help='Connection port')
+    parser.add_argument('port', metavar='PORT', type=int, help='Connection port')
     parser.add_argument('-u', dest='udp', action='store_true', default=False, help='Use UDP instead of default TCP')
     parser.add_argument('--testserver', nargs='?',  metavar='PORT', default=False, help='Launch test server [default port: 12345]')
 
