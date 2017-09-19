@@ -67,3 +67,6 @@ def main():
         ts.launch_testserver(args.testserver)
     else:
         net.connect(args)
+
+if __name__ == '__main__':
+    main()
