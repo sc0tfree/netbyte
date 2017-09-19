@@ -19,7 +19,7 @@ def description():
     '''
     argparse description text
     '''
-    heading = 'Netbyte ' + VERSION + ' (by sc0tfree)'
+    heading = 'Netbyte %s (by sc0tfree)' % VERSION
     body = '''
     Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
     It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.'''
@@ -37,7 +37,7 @@ def parse_arguments():
 
     parser.add_argument('hostname', metavar='HOSTNAME', help='Host or IP to connect to')
     parser.add_argument('port', metavar='PORT', help='Connection port')
-    parser.add_argument('-u', dest='udp', action="store_true", default=False, help='Use UDP instead of default TCP')
+    parser.add_argument('-u', dest='udp', action='store_true', default=False, help='Use UDP instead of default TCP')
     parser.add_argument('--testserver', nargs='?',  metavar='PORT', default=False, help='Launch test server [default port: 12345]')
 
     if len(sys.argv) == 1:
