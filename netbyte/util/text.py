@@ -97,7 +97,7 @@ def process_buffer(string):
     if m:
         try:
             evaluated = eval(m.group(1))
-        except (SyntaxError, ValueError):
+        except (SyntaxError, ValueError, TypeError):
             out.print_info("Incorrectly formatted statement. Please try again.")
             return ''
         return evaluated
