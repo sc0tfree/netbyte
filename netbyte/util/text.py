@@ -11,51 +11,27 @@
 # netbyte.util.text module
 #
 
-
-def is_symbol(character):
-    '''
-    Checks to see if a character is a symbol.
-
-    Returns:
-        bool: True if character is symbol
-    '''
-    symbols = "~`!@#$%^&*()_-+={}[]:>;',</?*-+"
-    if character not in symbols:
-        return False
-    else:
-        return True
-
-
 def to_hex(string):
     '''
-    Converts string to formatted hex and ASCII reference values
+    Converts byte string to formatted hex and ASCII reference values
 
     Returns:
         str: Formatted hex & ASCII reference
     '''
+    
+    symbols = "~`!@#$%^&*()_-+={}[]:>;',</?*-+"
 
     results = []
 
     new_line = True
 
-    for character in string:
-
-        # Convert ASCII to unicode
-        unicode_value = ord(character)
-
-        # Convert unicode to hex
-        hex_value = hex(unicode_value).replace('0x', '')
-
-        # Add a preceding 0
-        if len(hex_value) == 1:
-            hex_value = '0' + hex_value
-
-        # Make upper case
-        hex_value = hex_value.upper()
+    for byte in string:
+        # Convert to upper-case hexadecimal with two places
+        hex_value = "%02X" % ord(byte)
 
         # Add reference ASCII for readability
-        if character.isalpha() or character.isdigit() or is_symbol(character):
-            hex_value = hex_value + '(' + character + ')'
+        if byte.isalpha() or byte.isdigit() or byte in symbols:
+            hex_value = hex_value + '(' + byte + ')'
 
         # Add a space in between hex values (not to a new line)
         if not new_line:
@@ -71,8 +47,4 @@ def to_hex(string):
 
         results.append(hex_value)
 
-    full_hex = ''
-    for result in results:
-        full_hex += result
-
-    return full_hex
+    return ''.join(results)
