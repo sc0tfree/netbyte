@@ -17,7 +17,7 @@ from Queue import Queue
 import output as out
 
 
-def check_eval(string):
+def eval_expressions(string):
     p = re.compile('^\s*!!([\s\S]*)')
     m = p.match(string)
     if m:
@@ -51,7 +51,7 @@ class ReadAsync(object):
     def enqueue(self):
         while True:
             buffer = self.read(*self.args)
-            buffer_e = check_eval(buffer)
+            buffer_e = eval_expressions(buffer)
             self.queue.put(buffer_e)
 
     def dequeue(self):
