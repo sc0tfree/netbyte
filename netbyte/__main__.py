@@ -19,7 +19,7 @@ def description():
     '''
     argparse description text
     '''
-    heading = 'Netbyte %s (by sc0tfree)' % VERSION
+    heading = 'Netbyte v%s (by sc0tfree)' % VERSION
     body = '''
     Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
     It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.'''
