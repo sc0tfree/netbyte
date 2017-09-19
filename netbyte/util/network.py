@@ -39,7 +39,9 @@ def connect(args):
         connection.connect(address)
 
     except socket.error:
-        out.print_error("Could not establish connection to " + address[0] + ":" + str(address[1]))
+        out.print_error('Could not establish connection to %s:%d' % (address[0], address[1]))
+    except OverflowError:
+        out.print_error('Port must be between 1 and 65535')
 
     out.print_info("Connection Established")
 
