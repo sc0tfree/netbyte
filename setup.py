@@ -15,6 +15,6 @@ setup(
         'colorama',
     ],
     entry_points = {
-        "console_scripts" : ['netbyte = netbyte.netbyte:main']
+        "console_scripts" : ['netbyte = netbyte.__main__:main']
     },
 )
