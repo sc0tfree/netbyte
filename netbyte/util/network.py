@@ -32,14 +32,14 @@ def connect(args):
         connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     connection.settimeout(2)
-
-    address = (args.hostname, int(args.port))
+    
+    address = (args.hostname, args.port)
 
     try:
         connection.connect(address)
 
     except socket.error:
-        out.print_error('Could not establish connection to %s:%d' % (address[0], address[1]))
+        out.print_error('Could not establish connection to %s:%d' % address)
     except OverflowError:
         out.print_error('Port must be between 1 and 65535')
 
@@ -54,7 +54,7 @@ def connect(args):
                 data = connection.recv(4096)
                 if not data:
                     raise socket.error
-                out.print_ascii(data)
+                out.print_raw(data)
                 out.print_hex(text.to_hex(data))
             except socket.error, e:
                 if e.errno != errno.EWOULDBLOCK:
