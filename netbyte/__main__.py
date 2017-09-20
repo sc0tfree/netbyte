@@ -39,6 +39,7 @@ def parse_arguments():
     parser.add_argument('port', metavar='PORT', type=int, help='Connection port')
     parser.add_argument('-u', dest='udp', action='store_true', default=False, help='Use UDP instead of default TCP')
     parser.add_argument('--testserver', nargs='?',  metavar='PORT', default=False, help='Launch test server [default port: 12345]')
+    parser.add_argument('--no-colors', action='store_true', default=False, help='Do not use colors in the output')
 
     if len(sys.argv) == 1:
 

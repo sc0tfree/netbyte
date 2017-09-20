@@ -31,6 +31,9 @@ def connect(args):
     else:
         connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+    if args.no_colors:
+        out.use_colors = False
+
     connection.settimeout(2)
     
     address = (args.hostname, args.port)
