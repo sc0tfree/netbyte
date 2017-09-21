@@ -14,7 +14,7 @@
 import re
 from threading import Thread
 from Queue import Queue
-import output as out
+import output
 
 
 def eval_expression(string):
@@ -29,7 +29,7 @@ def eval_expression(string):
         try:
             evaluated = eval(m.group(2), {'__builtins__': None}, {})
         except (SyntaxError, ValueError, TypeError, NameError):
-            out.print_info('Incorrectly formatted statement. Please try again.')
+            output.print_info('Incorrectly formatted statement. Please try again.')
             return ''
         if len(m.group(1)) == 3:
             return evaluated + '\n'
