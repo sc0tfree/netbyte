@@ -96,7 +96,7 @@ def connect(args):
                 if not data:
                     raise socket.error
                 out.print_raw(data)
-                out.print_hex(text.to_hex(data))
+                out.print_hex(to_hex(data))
             except socket.error, e:
                 if e.errno != errno.EWOULDBLOCK:
                     raise
