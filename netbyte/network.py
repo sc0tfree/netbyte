@@ -17,7 +17,7 @@ import sys
 import time
 from Queue import Empty
 
-import output as out
+import output
 from readasync import ReadAsync
 
 
@@ -70,7 +70,7 @@ def connect(args):
         connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     if args.no_colors:
-        out.use_colors = False
+        output.use_colors = False
 
     connection.settimeout(2)
     
@@ -80,11 +80,11 @@ def connect(args):
         connection.connect(address)
 
     except socket.error:
-        out.print_error_and_exit('Could not establish connection to %s:%d' % address)
+        output.print_error_and_exit('Could not establish connection to %s:%d' % address)
     except OverflowError:
-        out.print_error_and_exit('Port must be between 1 and 65535')
+        output.print_error_and_exit('Port must be between 1 and 65535')
 
-    out.print_info('Connection Established')
+    output.print_info('Connection Established')
 
     try:
         connection.setblocking(0)
@@ -95,8 +95,8 @@ def connect(args):
                 data = connection.recv(4096)
                 if not data:
                     raise socket.error
-                out.print_raw(data)
-                out.print_hex(to_hex(data))
+                output.print_raw(data)
+                output.print_hex(to_hex(data))
             except socket.error, e:
                 if e.errno != errno.EWOULDBLOCK:
                     raise
@@ -107,6 +107,6 @@ def connect(args):
 
     except KeyboardInterrupt:
         connection.close()
-        out.print_error_and_exit('\nExiting...')
+        output.print_error_and_exit('\nExiting...')
     except socket.error:
-        out.print_error_and_exit('Connection closed')
+        output.print_error_and_exit('Connection closed')
