@@ -36,6 +36,7 @@ python setup.py install
 
 ```
 $ netbyte example.com 12345
+Connection Established
 ������!��'
 FF FB 01 FF FB 03 FF FD 21(!) FF FD 27(')
 
@@ -57,11 +58,12 @@ Connection closed
 You can also pipe input into netbyte:
 ```
 $ echo "GET /" | netbyte test.com 80
+Connection Established
 <html>
 <head><title>302 Found</title></head>
 <body bgcolor="white">
 <center><h1>302 Found</h1></center>
-<hr><center>nginx/1.11.13</center>
+<hr><center>nginx/1.13.4</center>
 </body>
 </html>
 
@@ -69,7 +71,7 @@ $ echo "GET /" | netbyte test.com 80
 3C(<) 68(h) 65(e) 61(a) 64(d) 3E(>) 3C(<) 74(t) 69(i) 74(t) 6C(l) 65(e) 3E(>) 33(3) 30(0) 32(2) 20 46(F) 6F(o) 75(u) 6E(n) 64(d) 3C(<) 2F(/) 74(t) 69(i) 74(t) 6C(l) 65(e) 3E(>) 3C(<) 2F(/) 68(h) 65(e) 61(a) 64(d) 3E(>) 0D 0A(\n)
 3C(<) 62(b) 6F(o) 64(d) 79(y) 20 62(b) 67(g) 63(c) 6F(o) 6C(l) 6F(o) 72(r) 3D(=) 22 77(w) 68(h) 69(i) 74(t) 65(e) 22 3E(>) 0D 0A(\n)
 3C(<) 63(c) 65(e) 6E(n) 74(t) 65(e) 72(r) 3E(>) 3C(<) 68(h) 31(1) 3E(>) 33(3) 30(0) 32(2) 20 46(F) 6F(o) 75(u) 6E(n) 64(d) 3C(<) 2F(/) 68(h) 31(1) 3E(>) 3C(<) 2F(/) 63(c) 65(e) 6E(n) 74(t) 65(e) 72(r) 3E(>) 0D 0A(\n)
-3C(<) 68(h) 72(r) 3E(>) 3C(<) 63(c) 65(e) 6E(n) 74(t) 65(e) 72(r) 3E(>) 6E(n) 67(g) 69(i) 6E(n) 78(x) 2F(/) 31(1) 2E 31(1) 31(1) 2E 31(1) 33(3) 3C(<) 2F(/) 63(c) 65(e) 6E(n) 74(t) 65(e) 72(r) 3E(>) 0D 0A(\n)
+3C(<) 68(h) 72(r) 3E(>) 3C(<) 63(c) 65(e) 6E(n) 74(t) 65(e) 72(r) 3E(>) 6E(n) 67(g) 69(i) 6E(n) 78(x) 2F(/) 31(1) 2E 31(1) 33(3) 2E 34(4) 3C(<) 2F(/) 63(c) 65(e) 6E(n) 74(t) 65(e) 72(r) 3E(>) 0D 0A(\n)
 3C(<) 2F(/) 62(b) 6F(o) 64(d) 79(y) 3E(>) 0D 0A(\n)
 3C(<) 2F(/) 68(h) 74(t) 6D(m) 6C(l) 3E(>) 0D 0A(\n)
 
