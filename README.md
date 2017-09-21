@@ -10,16 +10,16 @@ It is lightweight, fully interactive and provides formatted output in both hexad
 
 ## Why
 
-When testing proprietary or custom-written services on pentests, 
-I’ve frequently been disappointed with my toolkit's usability to reverse engineer or fuzz these protocols.
+When testing proprietary or custom-written services, I’ve frequently been disappointed with my toolkit's 
+ease of usability to reverse engineer or fuzz these protocols.
 
-Reverse engineering these protocols has traditionally been done using netcat with wireshark and/or hexdump.
-However, due to truncation issues with using hexdump (i.e.: `nc domain.com 1234 | hexdump -C`)
-and wireshark’s tedious process, I decided to create Netbyte as quick and easy alternative when opening unknown ports.
+I have traditionally used Netcat with Wireshark and/or hexdump.
+However, due to truncation issues with using hexdump (e.g.: `nc domain.com 1234 | hexdump -C`)
+and Wireshark’s tedious process, I decided to create Netbyte as quick and easy alternative when opening unknown ports.
 
-Additionally, I found myself wanting to manually fuzz these services to observe any irregular behavior. 
-I integrated Python string evaluation capabilities inside the tool in an effort to quickly send large strings 
-in both ASCII as well as hexidecimal.
+Additionally, I wanted to be able to send hex back to the server and begin testing edge cases using fuzzing.
+To address this, I integrated Python string evaluation capabilities inside of Netbyte, allowing the user to send 
+strings of crafted bytes to the server.
 
 ## Install
 
