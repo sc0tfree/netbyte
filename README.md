@@ -98,6 +98,7 @@ To include a newline automatically at the end of an evaluated expression, use `!
 
 Let's see it in action by crashing a PCMan FTP Server:
 ```
+$ netbyte pcmanserver.com 21
 Connection Established
 220 PCMan's FTP Server 2.0 Ready.
 
