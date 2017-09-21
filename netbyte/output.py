@@ -15,6 +15,7 @@ from colorama import Fore, Style
 
 use_colors = True
 
+
 def print_info(string):
     '''
     Print string with info color configuration
