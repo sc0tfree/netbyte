@@ -8,7 +8,7 @@
 #                       Twitter: @sc0tfree
 #                       Email: henry@sc0tfree.com
 #
-# netbyte.util.output module
+# netbyte.output module
 #
 
 from colorama import Fore, Style
@@ -44,6 +44,7 @@ def print_raw(string):
     else:
         print string
 
+
 def print_hex(string):
     '''
     Print string with hex color configuration
@@ -52,6 +53,7 @@ def print_hex(string):
         print(Fore.BLUE + Style.BRIGHT + string + Style.RESET_ALL)
     else:
         print string
+
 
 def print_error_and_exit(string):
     '''
@@ -62,4 +64,3 @@ def print_error_and_exit(string):
     else:
         print(string)
     exit(1)
-
