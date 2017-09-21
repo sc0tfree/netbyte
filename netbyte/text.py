@@ -27,7 +27,7 @@ def to_hex(string):
 
     for byte in string:
         # Convert to upper-case hexadecimal with two places
-        hex_value = "%02X" % ord(byte)
+        hex_value = '%02X' % ord(byte)
 
         # Add reference ASCII for readability
         if byte.isalpha() or byte.isdigit() or byte in symbols:

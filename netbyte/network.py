@@ -46,7 +46,7 @@ def connect(args):
     except OverflowError:
         out.print_error_and_exit('Port must be between 1 and 65535')
 
-    out.print_info("Connection Established")
+    out.print_info('Connection Established')
 
     try:
         connection.setblocking(0)
@@ -69,6 +69,6 @@ def connect(args):
 
     except KeyboardInterrupt:
         connection.close()
-        out.print_error_and_exit("\nExiting...")
+        out.print_error_and_exit('\nExiting...')
     except socket.error:
-        out.print_error_and_exit("Connection closed")
+        out.print_error_and_exit('Connection closed')
