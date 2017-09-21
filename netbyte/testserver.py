@@ -15,7 +15,8 @@ import os
 import re
 import errno
 import socket
-import output as out
+
+import output
 from netbyte import __version__ as VERSION
 
 
@@ -48,7 +49,7 @@ def handle_connection(connection, addr):
 
         returns: Any remaining message received after the test is ended, or ""
         '''
-        out.print_flat('%s:' % test_name)
+        output.print_flat('%s:' % test_name)
         connection.send("%s:\nType 'end' to exit\n" % test_name)
         messages = []
         remaining_message = ''
@@ -98,7 +99,7 @@ def handle_connection(connection, addr):
         '''
         Receives a string, sends it back
         '''
-        out.print_flat('Received: %s' % line.rstrip())
+        output.print_flat('Received: %s' % line.rstrip())
         connection.send(line)
 
     def hex_handler(line):
@@ -113,7 +114,7 @@ def handle_connection(connection, addr):
             connection.send('You must enter a number larger than 0. Defaulting to 10.\n')
             hex_length = 10
         hex_string = os.urandom(hex_length - 1) + '\x0a'
-        out.print_flat('Sending: %s' % hex_string)
+        output.print_flat('Sending: %s' % hex_string)
         connection.send(hex_string)
 
     def byte_count_handler(line):
@@ -122,7 +123,7 @@ def handle_connection(connection, addr):
         '''
         size = len(line)
         response = 'Received %d bytes.' % size
-        out.print_flat(response)
+        output.print_flat(response)
         connection.send('%s\n' % response)
 
     remaining_msg = run_test('Echo Test', '', echo_handler)
@@ -133,12 +134,12 @@ def handle_connection(connection, addr):
 
     if remaining_msg:
         info = 'Received unexpected data after all tests ended: %s' % remaining_msg
-        out.print_info(info)
+        output.print_info(info)
         connection.send(info)
 
     connection.send('Closing connection to test server\n')
     connection.close()
-    out.print_info('Closed connection to %s:%d' % addr)
+    output.print_info('Closed connection to %s:%d' % addr)
 
 
 def launch_testserver(port):
@@ -147,7 +148,7 @@ def launch_testserver(port):
     '''
     host = '127.0.0.1'
 
-    out.print_info('Starting test server on %s:%d' % (host, port))
+    output.print_info('Starting test server on %s:%d' % (host, port))
 
     s = socket.socket()
 
@@ -158,11 +159,11 @@ def launch_testserver(port):
         s.bind((host, port))
     except socket.error as e:
         if e.errno == errno.EACCES:
-            out.print_error_and_exit('Permission denied: try again as superuser')
+            output.print_error_and_exit('Permission denied: try again as superuser')
         elif e.errno == errno.EADDRINUSE:
-            out.print_error_and_exit('Port is already in use')
+            output.print_error_and_exit('Port is already in use')
     except OverflowError:
-        out.print_error_and_exit('Port must be between 1 and 65535')
+        output.print_error_and_exit('Port must be between 1 and 65535')
 
     s.listen(5)
 
@@ -170,19 +171,19 @@ def launch_testserver(port):
         while True:
             try:
                 c, addr = s.accept()
-                out.print_info('Connection established from %s:%d' % addr)
+                output.print_info('Connection established from %s:%d' % addr)
                 handle_connection(c, addr)
 
             except socket.error as e:
                 if e.errno == errno.EPIPE:
-                    out.print_info('Connection closed by user.')
+                    output.print_info('Connection closed by user.')
                 else:
-                    out.print_info('Socket error: %s' % errno.errorcode[e.errno])
+                    output.print_info('Socket error: %s' % errno.errorcode[e.errno])
 
             except DisconnectedError:
-                out.print_info('Connection closed.')
+                output.print_info('Connection closed.')
                 c.close()
 
     except KeyboardInterrupt:
         s.close()
-        out.print_error_and_exit('\nExiting...')
+        output.print_error_and_exit('\nExiting...')
