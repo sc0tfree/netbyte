@@ -8,12 +8,11 @@
 #                       Twitter: @sc0tfree
 #                       Email: henry@sc0tfree.com
 
-
-import argparse
 import sys
+import argparse
 
-import network as net
-import testserver as ts
+import network
+import testserver
 from . import __version__ as VERSION
 
 
@@ -67,9 +66,9 @@ def main():
     args = parse_arguments()
 
     if args.testserver is not False:
-        ts.launch_testserver(args.testserver)
+        testserver.launch_testserver(args.testserver)
     else:
-        net.connect(args)
+        network.connect(args)
 
 if __name__ == '__main__':
     main()
