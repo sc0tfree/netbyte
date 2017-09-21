@@ -53,7 +53,7 @@ def print_hex(string):
     else:
         print string
 
-def print_error(string):
+def print_error_and_exit(string):
     '''
     Print string with error color configuration and exit with code 1
     '''

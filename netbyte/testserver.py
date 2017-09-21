@@ -158,11 +158,11 @@ def launch_testserver(port):
         s.bind((host, port))
     except socket.error as e:
         if e.errno == errno.EACCES:
-            out.print_error("Permission denied: try again as superuser")
+            out.print_error_and_exit("Permission denied: try again as superuser")
         elif e.errno == errno.EADDRINUSE:
-            out.print_error("Port is already in use")
+            out.print_error_and_exit("Port is already in use")
     except OverflowError:
-        out.print_error("Port must be between 1 and 65535")
+        out.print_error_and_exit("Port must be between 1 and 65535")
 
     s.listen(5)
 
@@ -185,4 +185,4 @@ def launch_testserver(port):
 
     except KeyboardInterrupt:
         s.close()
-        out.print_error("\nExiting...")
+        out.print_error_and_exit("\nExiting...")

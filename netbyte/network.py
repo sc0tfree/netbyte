@@ -42,9 +42,9 @@ def connect(args):
         connection.connect(address)
 
     except socket.error:
-        out.print_error('Could not establish connection to %s:%d' % address)
+        out.print_error_and_exit('Could not establish connection to %s:%d' % address)
     except OverflowError:
-        out.print_error('Port must be between 1 and 65535')
+        out.print_error_and_exit('Port must be between 1 and 65535')
 
     out.print_info("Connection Established")
 
@@ -69,6 +69,6 @@ def connect(args):
 
     except KeyboardInterrupt:
         connection.close()
-        out.print_error("\nExiting...")
+        out.print_error_and_exit("\nExiting...")
     except socket.error:
-        out.print_error("Connection closed")
+        out.print_error_and_exit("Connection closed")
