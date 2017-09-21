@@ -96,7 +96,7 @@ To include a newline automatically at the end of an evaluated expression, use `!
 | Expression                | Result                                |
 |:--------------------------|:--------------------------------------|
 | `!! "A" * 250`            | Send 250 A's                          |
-| `!! "\x65" * 250`         | Send 250 A's                          |
+| `!! "\x41" * 250`         | Send 250 A's                          |
 | `!! "A" * 250 + "\n"`     | Send 250 A's and a newline ('\n')     |
 | `!!! "A" * 250`           | Send 250 A's and a newline ('\n')     |
 | `!!! "abc" * 2 + "def"`   | Send 'abcabcdef' and a newline ('\n') |
