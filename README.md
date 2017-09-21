@@ -10,12 +10,16 @@ It is lightweight, fully interactive and provides formatted output in both hexad
 
 ## Why
 
-When testing proprietary or custom-written services on pentests, I’ve frequently been disappointed while trying to reverse engineer 
-these protocols.
+When testing proprietary or custom-written services on pentests, 
+I’ve frequently been disappointed with my toolkit's usability to reverse engineer or fuzz these protocols.
 
-In the past, this has been done using netcat with wireshark and/or hexdump.
+Reverse engineering these protocols has traditionally been done using netcat with wireshark and/or hexdump.
 However, due to truncation issues with using hexdump (i.e.: `nc domain.com 1234 | hexdump -C`)
 and wireshark’s tedious process, I decided to create Netbyte as quick and easy alternative when opening unknown ports.
+
+Additionally, I found myself wanting to manually fuzz these services to observe any irregular behavior. 
+I integrated Python string evaluation capabilities inside the tool in an effort to quickly send large strings 
+in both ASCII as well as hexidecimal.
 
 ## Install
 
@@ -82,20 +86,20 @@ Connection closed
 
 Netbyte is able to send evaluated Python expressions by using `!!` at the beginning of any input. This is useful for manual fuzzing and even exploitation.
 
-*Note: using `!!` mode does not automatically include a newline (\n) in the string to send.*
+*Note: using `!!` mode does not automatically include a newline ('\n') in the string to send.*
 
 ### Newlines
 
 To include a newline automatically at the end of an evaluated expression, use `!!!` at the beginning of any input.
 
 ### Examples:
-| Expression | Result |
-|:-----------|:-------|
-| `!! "A" * 250` | Send 250 A's |
-| `!! "\x65" * 250` | Send 250 A's |
-| `!! "A" * 250 + "\n"` | Send 250 A's and a newline ('\n')|
-| `!!! "A" * 250` | Send 250 A's and a newline ('\n') |
-| `!!! "abc" * 2 + "def"` | Send 'abcabcdef' and a newline ('\n') |
+| Expression                | Result                                |
+|:--------------------------|:--------------------------------------|
+| `!! "A" * 250`            | Send 250 A's                          |
+| `!! "\x65" * 250`         | Send 250 A's                          |
+| `!! "A" * 250 + "\n"`     | Send 250 A's and a newline ('\n')     |
+| `!!! "A" * 250`           | Send 250 A's and a newline ('\n')     |
+| `!!! "abc" * 2 + "def"`   | Send 'abcabcdef' and a newline ('\n') |
 
 
 Let's see it in action by crashing a PCMan FTP Server:
