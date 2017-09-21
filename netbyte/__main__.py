@@ -9,11 +9,13 @@
 #                       Email: henry@sc0tfree.com
 
 
-import sys
 import argparse
+import sys
+
+import network as net
+import testserver as ts
 from . import __version__ as VERSION
-import util.network as net
-import util.testserver as ts
+
 
 def description():
     '''

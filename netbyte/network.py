@@ -11,14 +11,14 @@
 # netbyte.util.network module
 #
 
-import socket
 import errno
+import socket
 import sys
 import time
 from Queue import Empty
 
-import text
 import output as out
+import text
 from readasync import ReadAsync
 
 

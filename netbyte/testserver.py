@@ -16,7 +16,7 @@ import re
 import errno
 import socket
 import output as out
-from .. import __version__ as VERSION
+from netbyte import __version__ as VERSION
 
 
 class DisconnectedError(Exception):
