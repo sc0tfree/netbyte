@@ -10,7 +10,7 @@ setup(
     author_email='henry@sc0tfree.com',
     description='Netbyte is a Netcat-style tool for manual probing, fuzzing and exploitation of TCP and UDP services. It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.',
     keywords='fuzzing netcat utils cli hexadecimal',
-    packages=['netbyte', 'netbyte.util'],
+    packages=['netbyte'],
     install_requires=[
         'colorama',
     ],
