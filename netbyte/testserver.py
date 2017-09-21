@@ -123,7 +123,7 @@ def handle_connection(connection, addr):
         size = len(line)
         response = 'Received %d bytes.' % size
         out.print_flat(response)
-        connection.send("%s\n" % response)
+        connection.send('%s\n' % response)
 
     remaining_msg = run_test('Echo Test', '', echo_handler)
     remaining_msg = run_test('Display Hex Test', 'Number of bytes to send:',
