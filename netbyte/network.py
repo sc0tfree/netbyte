@@ -8,7 +8,7 @@
 #                       Twitter: @sc0tfree
 #                       Email: henry@sc0tfree.com
 #
-# netbyte.util.network module
+# netbyte.network module
 #
 
 import errno

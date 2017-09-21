@@ -8,7 +8,7 @@
 #                       Twitter: @sc0tfree
 #                       Email: henry@sc0tfree.com
 #
-# netbyte.util.testserver module
+# netbyte.testserver module
 #
 
 import os
