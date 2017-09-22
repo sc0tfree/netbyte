@@ -86,7 +86,7 @@ Connection closed
 
 Netbyte is able to send evaluated Python expressions by using `!!` at the beginning of any input. This is useful for manual fuzzing and even exploitation.
 
-*Note: using `!!` mode does not automatically include a newline ('\n') in the string to send.*
+*Note: using `!!` mode does not automatically include a newline ('\n') at the end of the sent string.*
 
 ### Newlines
 
