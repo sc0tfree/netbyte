@@ -22,8 +22,9 @@ def description():
     '''
     heading = 'Netbyte v%s (by sc0tfree)' % VERSION
     body = '''
-    Netbyte is a Netcat-style tool that facilitates probing proprietary TCP and UDP services.
-    It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.'''
+    Netbyte is a Netcat-style tool that facilitates manual probing, fuzzing and
+    exploitation of TCP and UDP services. It is lightweight, fully interactive
+    and supports input and output in both plain text and hexadecimal.'''
     return heading + body
 
 
@@ -68,7 +69,7 @@ def main():
     if args.testserver is not False:
         testserver.launch_testserver(args.testserver)
     else:
-        network.connect(args)
+        net.connect(args)
 
 if __name__ == '__main__':
     main()

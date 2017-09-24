@@ -6,7 +6,7 @@
 [![sc0tfree Twitter](http://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Follow)](https://twitter.com/sc0tfree)
 
 Netbyte is a Netcat-style tool that facilitates manual probing, fuzzing and exploitation of TCP and UDP services.
-It is lightweight, fully interactive and allows for input as well as output in both hexadecimal and ASCII.
+It is lightweight, fully interactive and supports input and output in both plain text and hexadecimal.
 
 ## Why
 

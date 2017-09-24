@@ -19,9 +19,8 @@ import output
 
 def eval_expression(string):
     '''
-    Searches for an instance of !! in the string, and if found, replaces the
-    remaining string with the result of eval()ing it as Python code. This is
-    used in fuzzing, for example to produce repeated instances of a character.
+    Searches for an instance of !![!] in the string, and if found, replaces the
+    remaining string with the result of eval()ing it as Python code.
     '''
     p = re.compile('^\s*(!!!?)([\s\S]*)')
     m = p.match(string)

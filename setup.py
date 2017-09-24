@@ -8,7 +8,7 @@ setup(
     license='MIT License',
     author='sc0tfree',
     author_email='henry@sc0tfree.com',
-    description='Netbyte is a Netcat-style tool for manual probing, fuzzing and exploitation of TCP and UDP services. It is lightweight, fully interactive and provides formatted output in both hexadecimal and ASCII.',
+    description='Netbyte is a Netcat-style tool that facilitates manual probing, fuzzing and exploitation of TCP and UDP services. It is lightweight, fully interactive and supports input and output in both plain text and hexadecimal.',
     keywords='fuzzing netcat utils cli hexadecimal',
     packages=['netbyte'],
     install_requires=[
