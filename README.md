@@ -143,6 +143,13 @@ In another terminal, connect to the test server using netbyte:
 $ netbyte localhost 12345
 ```
 
+## Disclaimer
+
+This project is made for educational and ethical testing purposes only.
+Usage of Netbyte for testing targets without prior mutual consent is illegal.
+It is the end user's responsibility to obey all applicable local, state and federal laws.
+The developer assumes no liability and is not responsible for any misuse or damage caused by this program.
+
 ## License and Contributions
 
 Netbyte is under the MIT License.
