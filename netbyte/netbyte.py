@@ -17,7 +17,7 @@ from colorama import Fore, Style, init as colorama_init
 from threading import Thread
 from queue import Queue, Empty
 
-from netbyte.core import to_hex, parse_hex_bytes
+from netbyte.core import to_hex
 
 
 def is_symbol(character):
@@ -111,27 +111,6 @@ def parse_arguments():
     parser.add_argument('hostname', metavar='HOSTNAME', help='Host or IP to connect to')
     parser.add_argument('port', metavar='PORT', help='Connection port')
     parser.add_argument('-u', dest='udp', action="store_true", default=False, help='Use UDP instead of default TCP')
-    parser.add_argument(
-        '-l',
-        '--listen',
-        dest='listen',
-        action='store_true',
-        default=False,
-        help='Listen instead of connect (TCP: accept one client; UDP: receive from a peer)',
-    )
-    parser.add_argument(
-        '--bind',
-        dest='bind',
-        default=None,
-        help='Bind address for --listen (defaults to HOSTNAME)',
-    )
-    parser.add_argument(
-        '--send-hex',
-        dest='send_hex',
-        action='store_true',
-        default=False,
-        help='Interpret stdin as hex bytes before sending (e.g. \"DE AD BE EF\" or \"0xDE,0xAD\")',
-    )
 
     if len(sys.argv) == 1:
 
@@ -151,49 +130,21 @@ def main():
     colorama_init()
     args = parse_arguments()
 
-    peer = None
-
-    if args.listen:
-        bind_host = args.bind if args.bind is not None else args.hostname
-        bind_addr = (bind_host, int(args.port))
-
-        if args.udp:
-            connection = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            try:
-                connection.bind(bind_addr)
-            except OSError:
-                print_error(f"Could not bind UDP listener on {bind_addr[0]}:{bind_addr[1]}")
-            print(Fore.GREEN + Style.BRIGHT + f"Listening (UDP) on {bind_addr[0]}:{bind_addr[1]}" + Style.RESET_ALL)
-        else:
-            server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            try:
-                server.bind(bind_addr)
-                server.listen(1)
-            except OSError:
-                print_error(f"Could not bind TCP listener on {bind_addr[0]}:{bind_addr[1]}")
-            print(Fore.GREEN + Style.BRIGHT + f"Listening (TCP) on {bind_addr[0]}:{bind_addr[1]}" + Style.RESET_ALL)
-            conn, addr = server.accept()
-            server.close()
-            connection = conn
-            peer = addr
-            print(Fore.GREEN + Style.BRIGHT + f"Connection established from {addr[0]}:{addr[1]}" + Style.RESET_ALL)
+    if args.udp:
+        connection = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     else:
-        if args.udp:
-            connection = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        else:
-            connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        connection.settimeout(2)
+    connection.settimeout(2)
 
-        address = (args.hostname, int(args.port))
+    address = (args.hostname, int(args.port))
 
-        try:
-            connection.connect(address)
-        except OSError:
-            print_error("Could not establish connection to " + address[0] + ":" + str(address[1]))
+    try:
+        connection.connect(address)
+    except OSError:
+        print_error("Could not establish connection to " + address[0] + ":" + str(address[1]))
 
-        print(Fore.GREEN + Style.BRIGHT + "Connection established" + Style.RESET_ALL)
+    print(Fore.GREEN + Style.BRIGHT + "Connection established" + Style.RESET_ALL)
 
     try:
         connection.setblocking(0)
@@ -201,18 +152,11 @@ def main():
 
         while True:
             try:
-                if args.listen and args.udp:
-                    data, addr = connection.recvfrom(4096)
-                    if data:
-                        peer = addr
-                        print_ascii(data)
-                        print_hex(to_hex(data))
-                else:
-                    data = connection.recv(4096)
-                    if not data:
-                        raise OSError
-                    print_ascii(data)
-                    print_hex(to_hex(data))
+                data = connection.recv(4096)
+                if not data:
+                    raise OSError
+                print_ascii(data)
+                print_hex(to_hex(data))
             except OSError as e:
                 if getattr(e, "errno", None) not in (errno.EWOULDBLOCK, errno.EAGAIN):
                     raise
@@ -222,26 +166,9 @@ def main():
                     # EOF on stdin
                     raise KeyboardInterrupt
 
-                if args.send_hex:
-                    try:
-                        outbound_bytes = parse_hex_bytes(outbound.strip())
-                    except ValueError as e:
-                        print_error(f"Invalid hex input: {e}")
-                    if args.listen and args.udp:
-                        if peer is None:
-                            print_error("No UDP peer yet (send requires receiving at least one datagram)")
-                        connection.sendto(outbound_bytes, peer)
-                    else:
-                        connection.send(outbound_bytes)
-                else:
-                    if isinstance(outbound, str):
-                        outbound = outbound.encode("utf-8")
-                    if args.listen and args.udp:
-                        if peer is None:
-                            print_error("No UDP peer yet (send requires receiving at least one datagram)")
-                        connection.sendto(outbound, peer)
-                    else:
-                        connection.send(outbound)
+                if isinstance(outbound, str):
+                    outbound = outbound.encode("utf-8")
+                connection.send(outbound)
             except Empty:
                 time.sleep(0.1)
             except (BlockingIOError, InterruptedError):
