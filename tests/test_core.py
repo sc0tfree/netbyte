@@ -29,3 +29,7 @@ def test_to_hex_includes_printable_references_and_newline_marker():
     assert "69(i)" in out
     assert "0A(\\n)" in out
     assert out.endswith("\n")
+
+
+def test_parse_hex_bytes_ignores_non_hex_separators():
+    assert parse_hex_bytes("DE-AD:BE_EF") == b"\xDE\xAD\xBE\xEF"
