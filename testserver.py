@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Author: sc0tfree
 # Twitter: @sc0tfree
@@ -12,9 +12,11 @@ def generate_random_hex(length):
     '''
     Generates a hex string of arbitrary length - 1, ending in a newline.
     '''
-    hex_string = os.urandom(length - 1)
-    hex_string += '\x0a'
-    return hex_string
+    if length <= 0:
+        return b""
+    hex_bytes = os.urandom(max(0, length - 1))
+    hex_bytes += b"\x0a"
+    return hex_bytes
 
 
 host = '127.0.0.1'
@@ -32,35 +34,35 @@ try:
 
         c, addr = s.accept()
 
-        print 'Connection established from', addr[0], ':', addr[1]
+        print('Connection established from', addr[0], ':', addr[1])
 
-        c.send('Hello from Test Server\n')
+        c.send(b'Hello from Test Server\n')
 
         # Echo Test
-        c.send('Echo Test - enter string:')
+        c.send(b'Echo Test - enter string:')
         data = c.recv(1024)
-        print 'Echo Test - received: ', data
-        c.send('Echo Test - received: ' + data + '\n')
+        print('Echo Test - received: ', data)
+        c.send(b'Echo Test - received: ' + data + b'\n')
 
         # Hex Test
-        c.send('Hex Test - enter length:')
+        c.send(b'Hex Test - enter length:')
         data = c.recv(1024)
 
         try:
-            hex_length = int(data)
+            hex_length = int(data.strip() or b"0")
         except ValueError:
-            c.send('You must enter a number. Defaulting to 10.\n')
+            c.send(b'You must enter a number. Defaulting to 10.\n')
             hex_length = 10
 
         hex_string = generate_random_hex(hex_length)
-        c.send('Sending hex string...\n\n')
-        print 'Hex Test - sending: ', hex_string
+        c.send(b'Sending hex string...\n\n')
+        print('Hex Test - sending: ', hex_string)
         c.send(hex_string)
 
         c.close()
-        print 'Closed connection to ', addr[0], ':', addr[1]
+        print('Closed connection to ', addr[0], ':', addr[1])
 
 except KeyboardInterrupt:
     c.close()
-    print '\nExiting...'
-    exit(0)
+    print('\nExiting...')
+    raise SystemExit(0)

@@ -13,6 +13,17 @@ setup(
     install_requires=[
         'colorama',
     ],
+    extras_require={
+        'test': ['pytest>=7'],
+    },
+    python_requires='>=3.9',
+    classifiers=[
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+        'Topic :: System :: Networking',
+    ],
     entry_points = {
         "console_scripts" : ['netbyte = netbyte.netbyte:main']
     },
