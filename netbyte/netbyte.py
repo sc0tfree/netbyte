@@ -17,7 +17,7 @@ from colorama import Fore, Style, init as colorama_init
 from threading import Thread
 from queue import Queue, Empty
 
-from netbyte.core import to_hex
+from netbyte.core import to_hex, parse_hex_bytes
 
 
 def is_symbol(character):
@@ -111,6 +111,13 @@ def parse_arguments():
     parser.add_argument('hostname', metavar='HOSTNAME', help='Host or IP to connect to')
     parser.add_argument('port', metavar='PORT', help='Connection port')
     parser.add_argument('-u', dest='udp', action="store_true", default=False, help='Use UDP instead of default TCP')
+    parser.add_argument(
+        '--send-hex',
+        dest='send_hex',
+        action='store_true',
+        default=False,
+        help='Interpret stdin as hex bytes before sending (e.g. \"DE AD BE EF\" or \"0xDE,0xAD\")',
+    )
 
     if len(sys.argv) == 1:
 
@@ -166,9 +173,16 @@ def main():
                     # EOF on stdin
                     raise KeyboardInterrupt
 
-                if isinstance(outbound, str):
-                    outbound = outbound.encode("utf-8")
-                connection.send(outbound)
+                if args.send_hex:
+                    try:
+                        outbound_bytes = parse_hex_bytes(outbound.strip())
+                    except ValueError as e:
+                        print_error(f"Invalid hex input: {e}")
+                    connection.send(outbound_bytes)
+                else:
+                    if isinstance(outbound, str):
+                        outbound = outbound.encode("utf-8")
+                    connection.send(outbound)
             except Empty:
                 time.sleep(0.1)
             except (BlockingIOError, InterruptedError):
